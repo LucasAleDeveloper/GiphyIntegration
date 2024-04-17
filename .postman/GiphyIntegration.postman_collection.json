@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "787ca5d5-fad6-41e3-bd08-39d700cccdf4",
+		"name": "GiphyIntegration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15641731",
+		"_collection_link": "https://www.postman.com/geome7ric/workspace/github-public-workspace/collection/15641731-787ca5d5-fad6-41e3-bd08-39d700cccdf4?action=share&source=collection_link&creator=15641731"
+	},
+	"item": [
+		{
+			"name": "Gifs",
+			"item": [
+				{
+					"name": "findOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/findOne/1r91ZwKcE2J7WhUqrh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"findOne",
+								"1r91ZwKcE2J7WhUqrh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/findAll?q=laugh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"findAll"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "laugh"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveFavourite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gifId\" : \"1r91ZwKcE2J7WhUqrh\",\r\n    \"alias\" : \"This is an example of an user's favourite gif :)2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/saveFavourite",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"saveFavourite"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    const jsonResponse = pm.response.json();\r",
+							"    const accessToken = jsonResponse.data.token;\r",
+							"    pm.environment.set(\"access_token\", accessToken);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"ejemplo1@example.com\",\r\n    \"password\" : \"somePassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
